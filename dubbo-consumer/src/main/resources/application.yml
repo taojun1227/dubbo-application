@@ -1,0 +1,10 @@
+dubbo:
+  application:
+    name: dubbo-application-consumer
+  registry:
+    address: 121.36.168.192:2181,121.36.168.192:2182,121.36.168.192:2183
+    protocol: zookeeper
+#  scan:
+#    base-packages: com.example
+
+
