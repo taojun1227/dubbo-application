@@ -15,17 +15,18 @@ import org.apache.dubbo.rpc.RpcContext;
  *
  * @author: jt-ape
  */
-@Service(loadbalance = "roundrobin",timeout = 7000)
+@Service(loadbalance = "roundrobin",timeout = 7000, cluster = "mycluster")
 public class HelloServiceImpl implements HelloService {
     @Override
     public String sayHello(String name) {
         try {
-            Thread.sleep(5000);
+            Thread.sleep(1000);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
         int port =RpcContext.getContext().getUrl().getPort();
         System.out.println("11111111111111111111111111111111111");
-        return "["+ port + "]" + "dubbo say hello："+ name;
+        throw new RuntimeException("测试集群容错。。。");
+//        return "["+ port + "]" + "dubbo say hello："+ name;
     }
 }
