@@ -15,7 +15,7 @@ import org.apache.dubbo.rpc.RpcContext;
  *
  * @author: jt-ape
  */
-@Service(loadbalance = "roundrobin",timeout = 7000, cluster = "mycluster")
+@Service(loadbalance = "roundrobin",timeout = 7000)
 public class HelloServiceImpl implements HelloService {
     @Override
     public String sayHello(String name) {
