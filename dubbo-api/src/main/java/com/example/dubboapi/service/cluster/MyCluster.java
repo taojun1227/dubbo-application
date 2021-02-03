@@ -40,8 +40,8 @@ public class MyCluster implements Cluster {
                 for (int i=0;i<5;i++) {
                         result = invoker.invoke(invocation);
                         if (result.hasException()) {
-                            result = new AsyncRpcResult(invocation);
-                            result.setValue(invoker.getUrl().getPort()+"：大哥我尽力了，尝试了五次都失败了");
+//                            result = new AsyncRpcResult();
+//                            result.setValue(invoker.getUrl().getPort()+"：大哥我尽力了，尝试了五次都失败了");
                         }
                 }
 

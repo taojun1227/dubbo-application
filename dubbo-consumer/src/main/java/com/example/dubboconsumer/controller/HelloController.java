@@ -1,11 +1,15 @@
 package com.example.dubboconsumer.controller;
 
+import com.example.dubboapi.listener.CallBackListener;
 import com.example.dubboapi.model.User;
 import com.example.dubboapi.service.HelloService;
+import com.example.dubboconsumer.callback.CallBackListenerImpl;
 import org.apache.dubbo.config.annotation.Reference;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.io.Serializable;
 
 /**
  * <p>Title: com.example.dubboconsumer.controller.HelloController </p>
@@ -34,6 +38,16 @@ public class HelloController {
         User result = helloService.sayHello();
         System.out.println(result);
         return result.getName();
+    }
+
+    @RequestMapping("/callback")
+    public String say2() {
+        return helloService.sayHello(new CallBackListener() {
+            @Override
+            public String callBack() {
+                return "通过回调方法返回客户端的东西";
+            }
+        });
     }
 
 }

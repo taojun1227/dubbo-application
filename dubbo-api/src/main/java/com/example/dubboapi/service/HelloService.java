@@ -1,5 +1,6 @@
 package com.example.dubboapi.service;
 
+import com.example.dubboapi.listener.CallBackListener;
 import com.example.dubboapi.model.User;
 
 /**
@@ -24,4 +25,6 @@ public interface HelloService {
     public String sayHello(String name);
 
     public User sayHello();
+
+    public String sayHello(CallBackListener callBackListener);
 }

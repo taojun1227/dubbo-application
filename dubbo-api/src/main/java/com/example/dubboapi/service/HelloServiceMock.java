@@ -1,5 +1,6 @@
 package com.example.dubboapi.service;
 
+import com.example.dubboapi.listener.CallBackListener;
 import com.example.dubboapi.model.User;
 
 /**
@@ -21,6 +22,11 @@ public class HelloServiceMock implements HelloService{
 
     @Override
     public User sayHello() {
+        return null;
+    }
+
+    @Override
+    public String sayHello(CallBackListener callBackListener) {
         return null;
     }
 }
