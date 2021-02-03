@@ -1,5 +1,6 @@
 package com.example.dubboapi.service;
 
+import com.example.dubboapi.model.User;
 import com.example.dubboapi.service.HelloService;
 
 /**
@@ -25,4 +26,8 @@ public class HelloServiceStub implements HelloService{
         return helloService.sayHello(name);
     }
 
+    @Override
+    public User sayHello() {
+        return null;
+    }
 }

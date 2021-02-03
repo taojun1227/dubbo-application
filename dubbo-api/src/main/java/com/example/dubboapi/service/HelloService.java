@@ -1,5 +1,7 @@
 package com.example.dubboapi.service;
 
+import com.example.dubboapi.model.User;
+
 /**
  * <p>Title: com.example.dubboapi.service.HelloService </p>
  *
@@ -20,4 +22,6 @@ public interface HelloService {
      * @Date: 2021/2/1 12:32
      */
     public String sayHello(String name);
+
+    public User sayHello();
 }

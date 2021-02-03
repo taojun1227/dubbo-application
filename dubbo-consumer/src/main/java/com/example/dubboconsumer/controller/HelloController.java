@@ -1,5 +1,6 @@
 package com.example.dubboconsumer.controller;
 
+import com.example.dubboapi.model.User;
 import com.example.dubboapi.service.HelloService;
 import org.apache.dubbo.config.annotation.Reference;
 import org.springframework.stereotype.Controller;
@@ -19,7 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @RestController
 public class HelloController {
-    @Reference(loadbalance = "roundrobin",timeout = 4000)
+    @Reference(loadbalance = "roundrobin",timeout = 4000,mock = "fail: return 111")
     private HelloService helloService;
     @RequestMapping("/say")
     public String say() {
@@ -27,4 +28,12 @@ public class HelloController {
         System.out.println(result);
         return result;
     }
+
+    @RequestMapping("/user")
+    public String say1() {
+        User result = helloService.sayHello();
+        System.out.println(result);
+        return result.getName();
+    }
+
 }
