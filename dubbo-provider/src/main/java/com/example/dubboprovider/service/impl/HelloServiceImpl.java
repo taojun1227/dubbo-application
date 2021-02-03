@@ -15,7 +15,7 @@ import org.apache.dubbo.rpc.RpcContext;
  *
  * @author: jt-ape
  */
-@Service(loadbalance = "roundrobin",timeout = 7000)
+@Service(loadbalance = "roundrobin",timeout = 7000,stub = "com.example.dubboapi.service.HelloServiceStub")
 public class HelloServiceImpl implements HelloService {
     @Override
     public String sayHello(String name) {
@@ -26,7 +26,7 @@ public class HelloServiceImpl implements HelloService {
         }
         int port =RpcContext.getContext().getUrl().getPort();
         System.out.println("11111111111111111111111111111111111");
-        throw new RuntimeException("测试集群容错。。。");
-//        return "["+ port + "]" + "dubbo say hello："+ name;
+//        throw new RuntimeException("测试集群容错。。。");
+        return "["+ port + "]" + "dubbo say hello："+ name;
     }
 }

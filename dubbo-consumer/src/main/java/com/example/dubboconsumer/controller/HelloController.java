@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @RestController
 public class HelloController {
-    @Reference(loadbalance = "roundrobin",timeout = 4000,mock = "force: return hhh")
+    @Reference(loadbalance = "roundrobin",timeout = 4000)
     private HelloService helloService;
     @RequestMapping("/say")
     public String say() {
