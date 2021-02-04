@@ -4,6 +4,8 @@ import com.example.dubboapi.listener.CallBackListener;
 import com.example.dubboapi.model.User;
 import com.example.dubboapi.service.HelloService;
 
+import java.util.concurrent.CompletableFuture;
+
 /**
  * <p>Title: com.example.dubboconsumer.stub.DemoStub </p>
  *
@@ -34,6 +36,16 @@ public class HelloServiceStub implements HelloService{
 
     @Override
     public String sayHello(CallBackListener callBackListener) {
+        return null;
+    }
+
+    @Override
+    public CompletableFuture<String> asyncCall() {
+        return null;
+    }
+
+    @Override
+    public String genericCall(User user) {
         return null;
     }
 }

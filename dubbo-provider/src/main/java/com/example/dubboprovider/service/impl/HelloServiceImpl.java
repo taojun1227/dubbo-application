@@ -12,6 +12,7 @@ import org.apache.dubbo.rpc.RpcException;
 import org.apache.jute.Index;
 
 import java.util.Map;
+import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ConcurrentHashMap;
 
 /**
@@ -25,7 +26,7 @@ import java.util.concurrent.ConcurrentHashMap;
  *
  * @author: jt-ape
  */
-@Service(loadbalance = "roundrobin",timeout = 7000, methods = {@Method(name = "sayHello",arguments = {@Argument(type = "com.example.dubboapi.listener.CallBackListener", callback = true)})},callbacks = 3)
+@Service(loadbalance = "roundrobin",timeout = 7000)
 public class HelloServiceImpl implements HelloService {
 
     private final Map<String, CallBackListener> listeners = new ConcurrentHashMap<String, CallBackListener>();
@@ -54,5 +55,24 @@ public class HelloServiceImpl implements HelloService {
     @Override
     public String sayHello(CallBackListener callBackListener) {
         return callBackListener.callBack();
+    }
+
+    @Override
+    public CompletableFuture<String> asyncCall() {
+        return CompletableFuture.supplyAsync(() -> {
+            try {
+                Thread.sleep(2000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+
+            return "我是一个异步方法";
+        });
+    }
+
+    @Override
+    public String genericCall(User user) {
+        System.out.println(user);
+        return "泛化返回成，接收到的用户名："+user.getName();
     }
 }

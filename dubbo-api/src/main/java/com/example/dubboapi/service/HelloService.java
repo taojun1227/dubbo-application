@@ -3,6 +3,8 @@ package com.example.dubboapi.service;
 import com.example.dubboapi.listener.CallBackListener;
 import com.example.dubboapi.model.User;
 
+import java.util.concurrent.CompletableFuture;
+
 /**
  * <p>Title: com.example.dubboapi.service.HelloService </p>
  *
@@ -27,4 +29,8 @@ public interface HelloService {
     public User sayHello();
 
     public String sayHello(CallBackListener callBackListener);
+
+    public CompletableFuture<String> asyncCall();
+
+    public String genericCall(User user);
 }
