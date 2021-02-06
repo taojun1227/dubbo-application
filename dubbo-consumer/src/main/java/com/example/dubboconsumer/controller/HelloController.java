@@ -31,10 +31,14 @@ import java.util.concurrent.ExecutionException;
  */
 @RestController
 public class HelloController {
-    @Reference(interfaceName = "com.example.dubboapi.service.HelloService",generic = true)
+//    @Reference(interfaceName = "com.example.dubboapi.service.HelloService",generic = true)
     private GenericService genericService;
-    @Reference
+//    @Reference
     private HelloService helloService;
+
+    @Reference(version = "generic")
+    private HelloService genericHelloService;
+
     @RequestMapping("/say")
     public String say() {
 
@@ -95,6 +99,11 @@ public class HelloController {
         user.put("age", "23");
 
         return genericService.$invoke("genericCall", new String[] {"com.example.dubboapi.model.User"}, new Object[]{user}).toString();
+    }
+
+    @RequestMapping("/genericService")
+    public String say5() {
+        return genericHelloService.sayHello("11111");
     }
 
 }
