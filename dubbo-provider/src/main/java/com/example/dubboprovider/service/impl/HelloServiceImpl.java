@@ -25,15 +25,10 @@ import java.util.concurrent.ConcurrentHashMap;
  * @author: jt-ape
  */
 @Service(loadbalance = "roundrobin",timeout = 7000)
-@Path("hello")
 public class HelloServiceImpl implements HelloService {
 
     private final Map<String, CallBackListener> listeners = new ConcurrentHashMap<String, CallBackListener>();
 
-    @GET
-    @Path("sayHello")
-    @Consumes({}) // 指定传入数据格式
-    @Produces({"application/json; charset=UTF-8", "text/xml; charset=UTF-8"}) // 指定返回数据格式
     @Override
     public String sayHello(@QueryParam("name") String name) {
         try {
@@ -44,8 +39,8 @@ public class HelloServiceImpl implements HelloService {
         int port =RpcContext.getContext().getUrl().getPort();
         System.out.println("11111111111111111111111111111111111");
 //        throw new RuntimeException("测试集群容错。。。");
-//        throw new RpcException("我看看这个异常");
-        return "["+ port + "]" + "dubbo say hello："+ name;
+        throw new RpcException("我看看这个异常");
+//        return "["+ port + "]" + "dubbo say hello："+ name;
     }
 
     @Override

@@ -9,12 +9,14 @@ import org.apache.dubbo.config.annotation.Reference;
 import org.apache.dubbo.rpc.RpcContext;
 import org.apache.dubbo.rpc.service.GenericService;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Random;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutionException;
 
@@ -33,20 +35,19 @@ import java.util.concurrent.ExecutionException;
 public class HelloController {
 //    @Reference(interfaceName = "com.example.dubboapi.service.HelloService",generic = true)
     private GenericService genericService;
-//    @Reference
+    @Reference(loadbalance = "consistenthash", mock = "fail:return 123")
     private HelloService helloService;
 
-    @Reference(version = "generic")
+//    @Reference(version = "generic")
     private HelloService genericHelloService;
 
-    @RequestMapping("/say")
-    public String say() {
+    @RequestMapping("/say/{id}")
+    public String say(@PathVariable String id) {
 
         CompletableFuture<String> completableFuture = RpcContext.getContext().asyncCall(() -> {
             return helloService.sayHello("异步调用");
         });
-
-        String result = helloService.sayHello("hahahaha");
+        String result = helloService.sayHello("hahahaha"+id);
         System.out.println(result);
 
         try {

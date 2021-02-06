@@ -1,3 +1,4 @@
+
 dubbo:
   application:
     name: dubbo-application-consumer
@@ -6,5 +7,6 @@ dubbo:
     protocol: zookeeper
 #  scan:
 #    base-packages: com.example
-
+server:
+  port: 8081
 
