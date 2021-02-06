@@ -15,7 +15,7 @@ import org.apache.dubbo.rpc.service.GenericService;
  *
  * @author: jt-ape
  */
-@Service(interfaceName = "com.example.dubboapi.service.HelloService",version = "generic")
+//@Service(interfaceName = "com.example.dubboapi.service.HelloService",version = "generic")
 public class GenericServiceImpl implements GenericService {
     @Override
     public Object $invoke(String s, String[] strings, Object[] objects) throws GenericException {

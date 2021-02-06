@@ -3,14 +3,12 @@ package com.example.dubboprovider.service.impl;
 import com.example.dubboapi.listener.CallBackListener;
 import com.example.dubboapi.model.User;
 import com.example.dubboapi.service.HelloService;
-import org.apache.dubbo.config.annotation.Argument;
-import org.apache.dubbo.config.annotation.Method;
 import org.apache.dubbo.config.annotation.Service;
-import org.apache.dubbo.remoting.RemotingException;
 import org.apache.dubbo.rpc.RpcContext;
 import org.apache.dubbo.rpc.RpcException;
-import org.apache.jute.Index;
 
+import javax.ws.rs.*;
+import javax.ws.rs.core.MediaType;
 import java.util.Map;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ConcurrentHashMap;
@@ -27,12 +25,17 @@ import java.util.concurrent.ConcurrentHashMap;
  * @author: jt-ape
  */
 @Service(loadbalance = "roundrobin",timeout = 7000)
+@Path("hello")
 public class HelloServiceImpl implements HelloService {
 
     private final Map<String, CallBackListener> listeners = new ConcurrentHashMap<String, CallBackListener>();
 
+    @GET
+    @Path("sayHello/{name}")
+    @Consumes({}) // 指定传入数据格式
+    @Produces({"application/json; charset=UTF-8", "text/xml; charset=UTF-8"}) // 指定返回数据格式
     @Override
-    public String sayHello(String name) {
+    public String sayHello(@PathParam("name") String name) {
         try {
             Thread.sleep(1000);
         } catch (InterruptedException e) {
