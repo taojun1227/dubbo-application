@@ -31,11 +31,11 @@ public class HelloServiceImpl implements HelloService {
     private final Map<String, CallBackListener> listeners = new ConcurrentHashMap<String, CallBackListener>();
 
     @GET
-    @Path("sayHello/{name}")
+    @Path("sayHello")
     @Consumes({}) // 指定传入数据格式
     @Produces({"application/json; charset=UTF-8", "text/xml; charset=UTF-8"}) // 指定返回数据格式
     @Override
-    public String sayHello(@PathParam("name") String name) {
+    public String sayHello(@QueryParam("name") String name) {
         try {
             Thread.sleep(1000);
         } catch (InterruptedException e) {
